@@ -31,10 +31,10 @@ const SYSTEM_PROMPT = `You are a California legal information assistant. Your pu
 10. When applicable, suggest using the website's calculators (child support, alimony) or relevant guides.`;
 
 async function callDeepSeek(messages: ChatMessage[]): Promise<string> {
-  const apiKey = (globalThis as any).DEEPSEEK_API_KEY || process?.env?.DEEPSEEK_API_KEY;
+  const apiKey = (globalThis as any).DEEPSEEKKEY || process?.env?.DEEPSEEKKEY;
 
   if (!apiKey) {
-    throw new Error('DEEPSEEK_API_KEY is not configured');
+    throw new Error('DEEPSEEKKEY is not configured');
   }
 
   const response = await fetch('https://api.deepseek.com/v1/chat/completions', {

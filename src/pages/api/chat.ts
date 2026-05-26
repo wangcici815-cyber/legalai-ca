@@ -43,9 +43,9 @@ export const POST: APIRoute = async ({ request }) => {
     ];
 
     // Call DeepSeek API
-    const apiKey = import.meta.env.DEEPSEEK_API_KEY;
+    const apiKey = import.meta.env.DEEPSEEKKEY;
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: 'DEEPSEEK_API_KEY not configured' }), {
+      return new Response(JSON.stringify({ error: 'DEEPSEEKKEY not configured' }), {
         status: 500,
         headers,
       });
