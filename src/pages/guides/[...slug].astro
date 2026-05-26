@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { articleSchema, faqSchema } from '../../utils/schema';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles
+    .filter((a) => !a.data.draft)
+    .map((article) => ({
+      params: { slug: article.slug },
+      props: { article },
+    }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+
+const siteUrl = 'https://legalai-ca.pages.dev';
+const pageUrl = `${siteUrl}/guides/${article.slug}`;
+
+// FAQ data for JSON-LD
+const faqData = getFaqs(article.slug);
+
+function getFaqs(slug: string): { question: string; answer: string }[] {
+  if (slug === 'how-to-file-divorce-california') {
+    return [
+      { question: 'Do I need a lawyer to file for divorce in California?', answer: 'No. California allows you to file for divorce without an attorney (pro per). However, if your case involves complex property, high conflict over custody, or domestic violence, consulting an attorney is recommended.' },
+      { question: 'What is a "no-fault" divorce in California?', answer: 'California is a no-fault divorce state. You do not need to prove your spouse did anything wrong. The only legal ground is "irreconcilable differences" — meaning the marriage cannot be saved.' },
+      { question: 'How is property divided in a California divorce?', answer: 'California is a community property state. All assets and debts acquired during marriage are generally divided 50/50.' },
+    ];
+  }
+  if (slug === 'california-child-support-guide') {
+    return [
+      { question: 'Can parents agree to a different child support amount?', answer: 'Yes. Parents can agree to a child support amount different from the guideline, if both parents sign a Stipulation (FL-350), the agreement is in the child\'s best interest, and each parent understands their guideline rights.' },
+      { question: 'What if the other parent hides income?', answer: 'You can request financial discovery, file a motion to compel disclosure, or ask the court to impute income based on earning capacity.' },
+      { question: 'Does child support cover college expenses?', answer: 'No. California child support does not include college expenses.' },
+    ];
+  }
+  if (slug === 'california-spousal-support-guide') {
+    return [
+      { question: 'Can spousal support be waived?', answer: 'Yes. Spousal support can be waived by agreement in a prenuptial agreement, postnuptial agreement, or marital settlement agreement.' },
+      { question: 'What if my ex refuses to pay spousal support?', answer: 'You can file a motion for contempt, request wage garnishment, ask the court to collect through the California State Disbursement Unit, or seek interest and penalties on unpaid support.' },
+      { question: 'How does cohabitation affect spousal support?', answer: 'If the supported party cohabitates with a new partner, this is a recognized change in circumstances. The paying party can file a motion to reduce or terminate support.' },
+    ];
+  }
+  if (slug === 'california-divorce-requirements') {
+    return [
+      { question: 'Can I file for divorce in California if I just moved here?', answer: 'No. You must have lived in California for at least 6 months before filing. If you just moved, you\'ll need to wait until you meet the residency requirement.' },
+      { question: 'Does legal separation have the same residency requirements?', answer: 'Generally, yes. The same residency requirements apply to legal separation as to divorce.' },
+      { question: 'Can I file for divorce in any California county?', answer: 'No. You must file in a county where you or your spouse meet the 3-month county residency requirement.' },
+    ];
+  }
+  return [];
+}
+---
+
+<ArticleLayout
+  title={article.data.title}
+  description={article.data.description}
+  canonical={`/guides/${article.slug}`}
+  datePublished={article.data.datePublished}
+  dateModified={article.data.dateModified || article.data.datePublished}
+  breadcrumbs={[
+    { name: 'Home', url: siteUrl },
+    { name: 'Guides', url: `${siteUrl}/guides` },
+    { name: article.data.title, url: pageUrl },
+  ]}
+>
+  <!-- Article JSON-LD (in body — valid for search engines) -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(articleSchema({
+      title: article.data.title,
+      description: article.data.description,
+      url: pageUrl,
+      datePublished: article.data.datePublished,
+      dateModified: article.data.dateModified || article.data.datePublished,
+    }))}
+  />
+
+  {faqData.length > 0 && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(faqSchema(faqData))}
+    />
+  )}
+
+  <Content />
+</ArticleLayout>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  breadcrumbs?: { name: string; url: string }[];
+  datePublished?: string;
+  dateModified?: string;
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  breadcrumbs,
+  datePublished,
+  dateModified,
+  noIndex,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  breadcrumbs={breadcrumbs}
+  {noIndex}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    {/* Breadcrumb */}
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+        {breadcrumbs.map((crumb, i) => (
+          <span>
+            {i > 0 && <span class="mx-2">›</span>}
+            {i < breadcrumbs.length - 1 ? (
+              <a href={crumb.url} class="hover:text-accent no-underline">{crumb.name}</a>
+            ) : (
+              <span class="text-gray-800">{crumb.name}</span>
+            )}
+          </span>
+        ))}
+      </nav>
+    )}
+
+    {/* Date info */}
+    {(datePublished || dateModified) && (
+      <div class="text-sm text-gray-500 mb-4">
+        {datePublished && <span>Published: {datePublished}</span>}
+        {dateModified && dateModified !== datePublished && (
+          <span class="ml-4">Updated: {dateModified}</span>
+        )}
+      </div>
+    )}
+
+    <div class="flex gap-8">
+      {/* Main content */}
+      <article class="flex-1 min-w-0">
+        <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-6">{title}</h1>
+        <div class="prose max-w-none">
+          <slot />
+        </div>
+
+        {/* Divider */}
+        <hr class="my-8 border-border" />
+
+        {/* Disclaimer */}
+        <Disclaimer />
+      </article>
+    </div>
+  </div>
+</BaseLayout>

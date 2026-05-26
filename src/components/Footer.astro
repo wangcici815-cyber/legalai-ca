@@ -1,0 +1,54 @@
+---
+import Disclaimer from './Disclaimer.astro';
+---
+
+<footer class="bg-primary text-white mt-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      {/* Brand */}
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+            LA
+          </span>
+          <span class="text-lg font-bold">LegalAI CA</span>
+        </div>
+        <p class="text-sm text-blue-200 leading-relaxed">
+          Free California legal information, calculators, and AI-powered assistance.
+        </p>
+      </div>
+
+      {/* Topics */}
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4 text-blue-200">Legal Topics</h3>
+        <ul class="space-y-2">
+          <li><a href="/divorce" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">Divorce in California</a></li>
+          <li><a href="/child-support" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">Child Support</a></li>
+          <li><a href="/spousal-support" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">Spousal Support</a></li>
+          <li><a href="/landlord-tenant" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">Landlord & Tenant</a></li>
+        </ul>
+      </div>
+
+      {/* Tools & About */}
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4 text-blue-200">Resources</h3>
+        <ul class="space-y-2">
+          <li><a href="/ai-assistant" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">AI Legal Assistant</a></li>
+          <li><a href="/child-support-calculator" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">Child Support Calculator</a></li>
+          <li><a href="/alimony-estimator" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">Alimony Estimator</a></li>
+          <li><a href="/about" class="text-sm text-blue-200 hover:text-white no-underline transition-colors">About / Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    {/* Disclaimer */}
+    <div class="border-t border-white/20 pt-6 mb-6">
+      <Disclaimer compact />
+    </div>
+
+    {/* Copyright */}
+    <div class="text-center text-xs text-blue-300">
+      <p>&copy; {new Date().getFullYear()} LegalAI CA. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

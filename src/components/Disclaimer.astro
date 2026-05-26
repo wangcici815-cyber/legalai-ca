@@ -1,0 +1,31 @@
+---
+// Legal Disclaimer — reusable component
+export interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+{
+  compact ? (
+    <p class="disclaimer">
+      This website provides general information for educational purposes only.
+      It does not constitute legal advice. Consult a licensed California attorney
+      for your specific situation.
+    </p>
+  ) : (
+    <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+      <p class="text-sm text-yellow-800 font-medium mb-1">⚠️ Legal Disclaimer</p>
+      <p class="text-xs text-yellow-700 leading-relaxed">
+        The information on this website is for general informational purposes only
+        and does not constitute legal advice. No attorney-client relationship is
+        formed. You should consult with a licensed attorney in California for
+        advice regarding your individual legal situation. We make no representations
+        about the accuracy or completeness of the information on this site.
+        Your use of this website or its tools does not create an attorney-client
+        relationship.
+      </p>
+    </div>
+  )
+}

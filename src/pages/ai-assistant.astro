@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AIChat from '../components/AIChat';
+import Disclaimer from '../components/Disclaimer.astro';
+---
+
+<BaseLayout
+  title="AI Legal Assistant — California Law"
+  description="Ask questions about California family law, landlord-tenant law, estate planning, and more. Free AI-powered legal information assistant."
+  canonical="/ai-assistant"
+  breadcrumbs={[
+    { name: 'Home', url: 'https://legalai-ca.pages.dev/' },
+    { name: 'AI Assistant', url: 'https://legalai-ca.pages.dev/ai-assistant' },
+  ]}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-4">
+        AI Legal Assistant
+      </h1>
+      <p class="text-lg text-gray-600">
+        Ask questions about California law. Our AI assistant provides general legal information
+        based on California codes and guidelines. <strong>Free, no sign-up required.</strong>
+      </p>
+    </div>
+
+    <AIChat client:load />
+
+    <!-- How it works -->
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="text-center p-4">
+        <span class="text-3xl block mb-2">💬</span>
+        <h4 class="font-semibold text-primary mb-1">Ask a Question</h4>
+        <p class="text-sm text-gray-600">Type your question about California law in plain language.</p>
+      </div>
+      <div class="text-center p-4">
+        <span class="text-3xl block mb-2">🤖</span>
+        <h4 class="font-semibold text-primary mb-1">AI Processes</h4>
+        <p class="text-sm text-gray-600">Our AI searches California codes and guidelines for relevant information.</p>
+      </div>
+      <div class="text-center p-4">
+        <span class="text-3xl block mb-2">📋</span>
+        <h4 class="font-semibold text-primary mb-1">Get Answers</h4>
+        <p class="text-sm text-gray-600">Receive general legal information with references to California law.</p>
+      </div>
+    </div>
+
+    {/* Limitations */}
+    <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+      <h3 class="font-semibold text-yellow-800 mb-2">⚠️ Limitations</h3>
+      <ul class="text-sm text-yellow-700 space-y-1 list-disc pl-4">
+        <li>This AI only provides information about <strong>California state law</strong>.</li>
+        <li>It cannot provide legal advice, represent you in court, or review your specific documents.</li>
+        <li>AI can make mistakes. Always verify important legal information with an attorney.</li>
+        <li>Your conversations are not confidential and do not create an attorney-client relationship.</li>
+        <li>Daily limit: 20 free questions per day.</li>
+      </ul>
+    </div>
+
+    <hr class="my-8 border-border" />
+    <Disclaimer />
+  </div>
+</BaseLayout>

@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ToolCard from '../components/ToolCard.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+---
+
+<BaseLayout
+  title="Free California Legal Information & Tools"
+  description="Free California legal guides, child support calculator, alimony estimator, and AI-powered legal assistant. Family law, landlord-tenant, estate planning and more."
+>
+  <HeroSection />
+
+  {/* Featured Tools */}
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-8 text-center">
+      Free California Legal Tools
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <ToolCard
+        title="Child Support Calculator"
+        description="Estimate monthly child support payments under California Guideline formula. Based on Family Code §4055."
+        href="/child-support-calculator"
+        icon="📊"
+      />
+      <ToolCard
+        title="Alimony Estimator"
+        description="Estimate spousal support duration and amount based on marriage length and income differences."
+        href="/alimony-estimator"
+        icon="💰"
+      />
+      <ToolCard
+        title="AI Legal Assistant"
+        description="Ask questions about California family law, landlord-tenant rights, and more. Powered by AI."
+        href="/ai-assistant"
+        icon="🤖"
+      />
+    </div>
+  </section>
+
+  {/* Popular Topics */}
+  <section class="bg-white py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-8 text-center">
+        Legal Topics
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="/divorce" class="block p-6 rounded-xl border border-border hover:border-accent hover:shadow-sm transition-all no-underline group">
+          <span class="text-3xl mb-2 block">💔</span>
+          <h3 class="font-semibold text-primary group-hover:text-accent transition-colors">Divorce</h3>
+          <p class="text-sm text-gray-600 mt-1">Filing, residency, community property, timeline</p>
+        </a>
+        <a href="/child-support" class="block p-6 rounded-xl border border-border hover:border-accent hover:shadow-sm transition-all no-underline group">
+          <span class="text-3xl mb-2 block">👶</span>
+          <h3 class="font-semibold text-primary group-hover:text-accent transition-colors">Child Support</h3>
+          <p class="text-sm text-gray-600 mt-1">Guideline formula, modification, enforcement</p>
+        </a>
+        <a href="/spousal-support" class="block p-6 rounded-xl border border-border hover:border-accent hover:shadow-sm transition-all no-underline group">
+          <span class="text-3xl mb-2 block">🤝</span>
+          <h3 class="font-semibold text-primary group-hover:text-accent transition-colors">Spousal Support</h3>
+          <p class="text-sm text-gray-600 mt-1">Temporary vs permanent, duration, tax implications</p>
+        </a>
+        <a href="/landlord-tenant" class="block p-6 rounded-xl border border-border hover:border-accent hover:shadow-sm transition-all no-underline group">
+          <span class="text-3xl mb-2 block">🏠</span>
+          <h3 class="font-semibold text-primary group-hover:text-accent transition-colors">Landlord & Tenant</h3>
+          <p class="text-sm text-gray-600 mt-1">Security deposits, evictions, repairs, rent control</p>
+        </a>
+        <a href="/wills" class="block p-6 rounded-xl border border-border hover:border-accent hover:shadow-sm transition-all no-underline group">
+          <span class="text-3xl mb-2 block">📝</span>
+          <h3 class="font-semibold text-primary group-hover:text-accent transition-colors">Wills & Estates</h3>
+          <p class="text-sm text-gray-600 mt-1">Probate, living trusts, power of attorney</p>
+        </a>
+        <a href="/workers-comp" class="block p-6 rounded-xl border border-border hover:border-accent hover:shadow-sm transition-all no-underline group">
+          <span class="text-3xl mb-2 block">🏥</span>
+          <h3 class="font-semibold text-primary group-hover:text-accent transition-colors">Workers' Comp</h3>
+          <p class="text-sm text-gray-600 mt-1">Benefits, claims process, appeals</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Latest Articles */}
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-8 text-center">
+      Latest Guides
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <ArticleCard
+        title="How to File for Divorce in California"
+        description="A step-by-step guide to filing for divorce in California, including residency requirements, forms needed, and timeline expectations."
+        href="/guides/how-to-file-divorce-california"
+        date="2026-05-26"
+        topic="Divorce"
+      />
+      <ArticleCard
+        title="California Child Support Guide"
+        description="Understand how California calculates child support, including the guideline formula, income sharing model, and factors that affect payments."
+        href="/guides/california-child-support-guide"
+        date="2026-05-26"
+        topic="Child Support"
+      />
+      <ArticleCard
+        title="California Spousal Support (Alimony) Explained"
+        description="Learn about temporary vs permanent spousal support, the 12 factors courts consider, and how duration is calculated."
+        href="/guides/california-spousal-support-guide"
+        date="2026-05-25"
+        topic="Spousal Support"
+      />
+      <ArticleCard
+        title="California Divorce Residency Requirements"
+        description="Who can file for divorce in California? Learn about the 6-month residency requirement and where to file your case."
+        href="/guides/california-divorce-requirements"
+        date="2026-05-24"
+        topic="Divorce"
+      />
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section class="bg-gradient-to-r from-accent to-blue-700 py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+        Have a Legal Question?
+      </h2>
+      <p class="text-lg text-blue-100 mb-8">
+        Ask our AI assistant about California law. Get answers based on current California codes and guidelines.
+      </p>
+      <a href="/ai-assistant" class="inline-flex items-center px-8 py-4 bg-white text-accent font-semibold rounded-lg hover:bg-blue-50 transition-colors">
+        Ask Your Question Now
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  {/* Disclaimer */}
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Disclaimer />
+  </section>
+</BaseLayout>

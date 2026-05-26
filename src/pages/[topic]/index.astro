@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import ToolCard from '../../components/ToolCard.astro';
+
+export async function getStaticPaths() {
+  const topics = [
+    { id: 'divorce', title: 'California Divorce Law', icon: '💔', description: 'Learn about filing for divorce, residency requirements, community property division, and the divorce process in California.' },
+    { id: 'child-support', title: 'California Child Support', icon: '👶', description: 'Understand how California calculates child support, including the guideline formula, income shares, and modifications.' },
+    { id: 'spousal-support', title: 'California Spousal Support', icon: '🤝', description: 'Learn about alimony in California, including temporary vs permanent support, the §4320 factors, and duration guidelines.' },
+    { id: 'landlord-tenant', title: 'California Landlord & Tenant Law', icon: '🏠', description: 'Know your rights as a tenant or landlord in California, including security deposits, evictions, repairs, and rent control.' },
+    { id: 'wills', title: 'California Wills & Estates', icon: '📝', description: 'Learn about wills, living trusts, probate, and power of attorney in California.' },
+    { id: 'workers-comp', title: "California Workers' Compensation", icon: '🏥', description: "Understand workers' compensation benefits, the claims process, and appeals in California." },
+  ];
+
+  return topics.map((topic) => ({
+    params: { topic: topic.id },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+const allArticles = await getCollection('articles');
+const topicArticles = allArticles
+  .filter((a) => !a.data.draft && a.data.topic.toLowerCase() === topic.id.replace('-', ' '))
+  .sort((a, b) => new Date(b.data.datePublished).getTime() - new Date(a.data.datePublished).getTime());
+
+const topicTools: Record<string, { title: string; description: string; href: string; icon: string }[]> = {
+  'child-support': [
+    { title: 'Child Support Calculator', description: 'Estimate monthly payments using CA guideline formula', href: '/child-support-calculator', icon: '📊' },
+  ],
+  'spousal-support': [
+    { title: 'Alimony Estimator', description: 'Estimate spousal support amounts and duration', href: '/alimony-estimator', icon: '💰' },
+  ],
+};
+
+const tools = topicTools[topic.id] || [];
+const siteUrl = 'https://legalai-ca.pages.dev';
+const pageUrl = `${siteUrl}/${topic.id}/`;
+---
+
+<BaseLayout
+  title={topic.title}
+  description={topic.description}
+  canonical={`/${topic.id}/`}
+  breadcrumbs={[
+    { name: 'Home', url: siteUrl },
+    { name: topic.title, url: pageUrl },
+  ]}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="text-4xl">{topic.icon}</span>
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-primary">{topic.title}</h1>
+        <p class="text-gray-600 mt-2">{topic.description}</p>
+      </div>
+    </div>
+
+    {tools.length > 0 && (
+      <section class="mt-8 mb-12">
+        <h2 class="text-xl font-semibold text-primary mb-4">Tools & Calculators</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {tools.map((tool) => (
+            <ToolCard {...tool} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold text-primary mb-4">Guides & Articles</h2>
+      {topicArticles.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {topicArticles.map((article) => (
+            <ArticleCard
+              title={article.data.title}
+              description={article.data.description}
+              href={`/guides/${article.slug}`}
+              date={article.data.datePublished}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="p-8 bg-gray-50 rounded-xl border border-border text-center">
+          <p class="text-gray-500">Guides for this topic are coming soon.</p>
+          <p class="text-sm text-gray-400 mt-2">
+            In the meantime, try our <a href="/ai-assistant" class="text-accent underline">AI Legal Assistant</a>.
+          </p>
+        </div>
+      )}
+    </section>
+
+    <section class="mt-12 p-6 bg-gradient-to-r from-accent to-blue-700 rounded-xl text-white text-center">
+      <h3 class="text-xl font-semibold mb-2">Have Specific Questions?</h3>
+      <p class="text-blue-100 mb-4">Ask our AI assistant about {topic.title.toLowerCase()}.</p>
+      <a href="/ai-assistant" class="inline-flex items-center px-6 py-3 bg-white text-accent font-medium rounded-lg hover:bg-blue-50 transition-colors">
+        Ask AI Assistant
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+    </section>
+  </div>
+</BaseLayout>

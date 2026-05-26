@@ -1,0 +1,9 @@
+# Cloudflare Pages redirects
+
+# Common misspellings and aliases
+/ai /ai-assistant 301
+/calculator /child-support-calculator 301
+/alimony /alimony-estimator 301
+
+# Guide shortcuts
+/guide/* /guides/:splat 301

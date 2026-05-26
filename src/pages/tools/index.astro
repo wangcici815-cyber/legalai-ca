@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+
+const tools = [
+  {
+    title: 'Child Support Calculator',
+    description: 'Estimate monthly child support payments using the California Guideline formula based on Family Code §4055.',
+    href: '/child-support-calculator',
+    icon: '📊',
+  },
+  {
+    title: 'Alimony Estimator',
+    description: 'Estimate spousal support amounts and duration based on income differences and marriage length.',
+    href: '/alimony-estimator',
+    icon: '💰',
+  },
+  {
+    title: 'AI Legal Assistant',
+    description: 'Ask questions about California law and get answers based on current codes and guidelines.',
+    href: '/ai-assistant',
+    icon: '🤖',
+  },
+];
+---
+
+<BaseLayout
+  title="Free California Legal Tools"
+  description="Free California legal calculators and tools including child support calculator, alimony estimator, and AI legal assistant."
+  canonical="/tools/"
+  breadcrumbs={[
+    { name: 'Home', url: 'https://legalai-ca.pages.dev/' },
+    { name: 'Tools', url: 'https://legalai-ca.pages.dev/tools/' },
+  ]}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-4">Free California Legal Tools</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      Use our free calculators and AI assistant to get quick answers about California law.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {tools.map((tool) => (
+        <ToolCard {...tool} />
+      ))}
+    </div>
+
+    <div class="mt-12 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+      <h2 class="font-semibold text-primary mb-2">More Tools Coming Soon</h2>
+      <p class="text-sm text-gray-700">
+        We're working on additional tools, including a California Divorce Timeline Calculator,
+        a Small Claims Court Fee Calculator, and a Security Deposit Return Calculator.
+        Stay tuned!
+      </p>
+    </div>
+  </div>
+</BaseLayout>

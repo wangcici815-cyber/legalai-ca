@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+---
+
+<BaseLayout
+  title="About LegalAI CA"
+  description="Learn about LegalAI CA — our mission to make California legal information accessible to everyone."
+  canonical="/about"
+  breadcrumbs={[
+    { name: 'Home', url: 'https://legalai-ca.pages.dev/' },
+    { name: 'About', url: 'https://legalai-ca.pages.dev/about' },
+  ]}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-6">About LegalAI CA</h1>
+
+    <div class="prose max-w-none">
+      <p>
+        LegalAI CA is a free resource dedicated to making California legal information
+        accessible and understandable for everyone. We provide plain-language guides,
+        free calculation tools, and AI-powered assistance to help you navigate
+        California's legal system.
+      </p>
+
+      <h2>What We Offer</h2>
+      <ul>
+        <li>
+          <strong>Informational Guides</strong> — Detailed articles about California
+          family law, landlord-tenant law, estate planning, and more.
+        </li>
+        <li>
+          <strong>Free Calculators</strong> — Tools like our Child Support Calculator
+          and Alimony Estimator, based on California legal formulas.
+        </li>
+        <li>
+          <strong>AI Legal Assistant</strong> — An AI-powered assistant that answers
+          questions about California law, citing relevant code sections.
+        </li>
+      </ul>
+
+      <h2>Our Mission</h2>
+      <p>
+        Legal information shouldn't require a law degree to understand. We believe
+        that everyone deserves access to clear, accurate legal information to make
+        informed decisions. While we cannot replace licensed attorneys, we aim to
+        bridge the knowledge gap and help you understand your rights and options.
+      </p>
+
+      <h2>Our Content</h2>
+      <p>
+        All content on LegalAI CA is researched and written with reference to:
+      </p>
+      <ul>
+        <li>California Family Code</li>
+        <li>California Code of Civil Procedure</li>
+        <li>California Probate Code</li>
+        <li>California Courts Self-Help Center</li>
+        <li>California Department of Child Support Services</li>
+      </ul>
+      <p>
+        Our content is regularly reviewed and updated to reflect changes in
+        California law. All dates of last review are noted on each page.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Have feedback or suggestions? We'd love to hear from you.
+        Reach out to us at: <strong>contact@legalai-ca.com</strong>
+      </p>
+    </div>
+
+    <hr class="my-8 border-border" />
+    <Disclaimer />
+  </div>
+</BaseLayout>
