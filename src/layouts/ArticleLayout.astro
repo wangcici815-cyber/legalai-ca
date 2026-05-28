@@ -31,6 +31,12 @@ const {
   breadcrumbs={breadcrumbs}
   {noIndex}
 >
+  <!-- Article meta tags for search engines -->
+  <meta slot="head" property="article:published_time" content={datePublished} />
+  {dateModified && dateModified !== datePublished && (
+    <meta slot="head" property="article:modified_time" content={dateModified} />
+  )}
+
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     {/* Breadcrumb */}
     {breadcrumbs && breadcrumbs.length > 0 && (

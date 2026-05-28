@@ -1,0 +1,30 @@
+---
+// Custom 404 page — keeps users on the site
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found (404)" description="The page you're looking for doesn't exist. Find California legal guides, calculators, and AI assistance." noIndex={true}>
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+    <span class="text-6xl block mb-6">⚖️</span>
+    <h1 class="text-4xl font-bold text-primary mb-4">Page Not Found</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      Sorry, we couldn't find the page you're looking for. It may have been moved or doesn't exist.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/" class="btn-primary">Go Home</a>
+      <a href="/ai-assistant" class="px-6 py-3 border-2 border-accent text-accent font-medium rounded-lg hover:bg-accent hover:text-white transition-colors no-underline">
+        Ask AI Assistant
+      </a>
+    </div>
+    <div class="mt-12 p-6 bg-gray-50 rounded-xl border border-border">
+      <h2 class="font-semibold text-primary mb-3">Popular Pages</h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/divorce" class="px-4 py-2 bg-white border border-border rounded-lg text-sm text-gray-600 hover:border-accent hover:text-accent no-underline transition-colors">Divorce Guide</a>
+        <a href="/child-support" class="px-4 py-2 bg-white border border-border rounded-lg text-sm text-gray-600 hover:border-accent hover:text-accent no-underline transition-colors">Child Support</a>
+        <a href="/child-support-calculator" class="px-4 py-2 bg-white border border-border rounded-lg text-sm text-gray-600 hover:border-accent hover:text-accent no-underline transition-colors">Support Calculator</a>
+        <a href="/alimony-estimator" class="px-4 py-2 bg-white border border-border rounded-lg text-sm text-gray-600 hover:border-accent hover:text-accent no-underline transition-colors">Alimony Estimator</a>
+        <a href="/tools" class="px-4 py-2 bg-white border border-border rounded-lg text-sm text-gray-600 hover:border-accent hover:text-accent no-underline transition-colors">All Tools</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -25,7 +25,7 @@ const {
 const siteUrl = 'https://legalai-ca.top';
 const pageTitle = `${title} | LegalAI CA`;
 const pageCanonical = canonical ? `${siteUrl}${canonical}` : undefined;
-const pageOgImage = ogImage || `${siteUrl}/favicon.svg`;
+const pageOgImage = ogImage || `${siteUrl}/og-image.svg`;
 ---
 
 <!doctype html>
@@ -44,9 +44,10 @@ const pageOgImage = ogImage || `${siteUrl}/favicon.svg`;
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={pageOgImage} />
 
     {/* Canonical */}
     {pageCanonical && <link rel="canonical" href={pageCanonical} />}
@@ -73,6 +74,8 @@ const pageOgImage = ogImage || `${siteUrl}/favicon.svg`;
       crossorigin="anonymous"></script>
     -->
     <!-- ========================================= -->
+    <!-- Article meta — injected by ArticleLayout -->
+    <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
