@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import AdUnit from '../components/AdUnit.astro';
 import Disclaimer from '../components/Disclaimer.astro';
 
 export interface Props {
@@ -57,7 +58,7 @@ const {
       </div>
     )}
 
-    <div class="flex gap-8">
+    <div class="flex flex-col lg:flex-row gap-8">
       {/* Main content */}
       <article class="flex-1 min-w-0">
         <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-6">{title}</h1>
@@ -65,12 +66,23 @@ const {
           <slot />
         </div>
 
+        <!-- Ad: After Article Content -->
+        <AdUnit format="in-article" class="my-8" />
+
         {/* Divider */}
         <hr class="my-8 border-border" />
 
         {/* Disclaimer */}
         <Disclaimer />
       </article>
+
+      {/* Sidebar — Desktop only */}
+      <aside class="hidden lg:block w-[300px] flex-shrink-0">
+        <div class="sticky top-8">
+          <!-- Ad: Sidebar Rectangle -->
+          <AdUnit format="rectangle" />
+        </div>
+      </aside>
     </div>
   </div>
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import AdUnit from '../components/AdUnit.astro';
 import Disclaimer from '../components/Disclaimer.astro';
 
 export interface Props {
@@ -50,6 +51,9 @@ const {
     <div class="bg-white rounded-xl border border-border shadow-sm p-6 sm:p-8 mb-8">
       <slot />
     </div>
+
+    <!-- Ad: After Tool Content -->
+    <AdUnit format="responsive" class="mb-8" />
 
     {/* Disclaimer */}
     <Disclaimer />

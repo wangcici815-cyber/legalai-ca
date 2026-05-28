@@ -1,4 +1,5 @@
 ---
+import AdUnit from '../../components/AdUnit.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 
@@ -44,6 +45,9 @@ const tools = [
         <ToolCard {...tool} />
       ))}
     </div>
+
+    <!-- Ad: After Tools List -->
+    <AdUnit format="responsive" class="my-10" />
 
     <div class="mt-12 p-4 bg-blue-50 border border-blue-200 rounded-lg">
       <h2 class="font-semibold text-primary mb-2">More Tools Coming Soon</h2>

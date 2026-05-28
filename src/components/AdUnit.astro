@@ -1,0 +1,50 @@
+---
+// Google AdSense Ad Unit — Placeholder Component
+//
+// When you're ready to activate:
+// 1. Uncomment the AdSense script in BaseLayout.astro <head>
+// 2. Replace data-ad-slot with your actual AdSense ad unit IDs
+// 3. Update the ad layout (horizontal, rectangle, etc.) per page
+
+export interface Props {
+  /** Ad format: 'banner' (728x90), 'responsive', 'in-article', 'multiplex' */
+  format?: 'banner' | 'responsive' | 'rectangle' | 'in-article';
+  /** Your Google AdSense ad unit ID (without 'ca-pub-' prefix) */
+  slot?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const { format = 'responsive', slot = 'YOUR_AD_SLOT_ID', class: className = '' } = Astro.props;
+
+// Size classes per format
+const sizeClasses: Record<string, string> = {
+  banner: 'min-h-[90px] md:min-h-[90px]',
+  responsive: 'min-h-[100px] md:min-h-[120px]',
+  rectangle: 'min-h-[250px] md:min-h-[250px]',
+  'in-article': 'min-h-[120px] md:min-h-[150px]',
+};
+---
+
+<!-- ============================================= -->
+<!-- 🚀 GOOGLE ADSENSE AD PLACEHOLDER              -->
+<!-- To activate:                                   -->
+<!-- 1. Uncomment the <script> in BaseLayout.astro  -->
+<!-- 2. Replace slot with your real ad unit ID      -->
+<!-- 3. Remove the "bg-gray-50" placeholder styling -->
+<!-- ============================================= -->
+<div
+  class="ad-unit w-full my-6 flex justify-center {sizeClasses[format]} {className}"
+  data-ad-format={format}
+  data-ad-slot={slot}
+  data-full-width-responsive="true"
+>
+  <div class="ad-container w-full max-w-[728px] bg-gray-50 border-2 border-dashed border-gray-200 rounded-lg flex items-center justify-center {sizeClasses[format]}">
+    <p class="text-xs text-gray-400 text-center px-4">
+      <span class="block text-lg mb-1">📢</span>
+      Advertisement<br />
+      <span class="text-[10px]">Google AdSense — Your ad here</span>
+    </p>
+  </div>
+</div>
+<!-- ============================================= -->

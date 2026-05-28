@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import AdUnit from '../../components/AdUnit.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import ToolCard from '../../components/ToolCard.astro';
@@ -68,6 +69,9 @@ const pageUrl = `${siteUrl}/${topic.id}/`;
         </div>
       </section>
     )}
+
+    <!-- Ad: Between tools and articles -->
+    <AdUnit format="responsive" class="my-6" />
 
     <section class="mt-8">
       <h2 class="text-xl font-semibold text-primary mb-4">Guides & Articles</h2>

@@ -1,4 +1,5 @@
 ---
+import AdUnit from '../components/AdUnit.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AIChat from '../components/AIChat';
 import Disclaimer from '../components/Disclaimer.astro';
@@ -44,6 +45,9 @@ import Disclaimer from '../components/Disclaimer.astro';
         <p class="text-sm text-gray-600">Receive general legal information with references to California law.</p>
       </div>
     </div>
+
+    <!-- Ad: After How It Works -->
+    <AdUnit format="responsive" class="mt-12" />
 
     {/* Limitations */}
     <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">

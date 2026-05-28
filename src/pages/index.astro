@@ -1,4 +1,5 @@
 ---
+import AdUnit from '../components/AdUnit.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ToolCard from '../components/ToolCard.astro';
@@ -11,6 +12,11 @@ import Disclaimer from '../components/Disclaimer.astro';
   description="Free California legal guides, child support calculator, alimony estimator, and AI-powered legal assistant. Family law, landlord-tenant, estate planning and more."
 >
   <HeroSection />
+
+  <!-- Ad: After Hero -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <AdUnit format="responsive" />
+  </section>
 
   {/* Featured Tools */}
   <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -78,6 +84,11 @@ import Disclaimer from '../components/Disclaimer.astro';
         </a>
       </div>
     </div>
+  </section>
+
+  <!-- Ad: Between Topics and Articles -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <AdUnit format="rectangle" />
   </section>
 
   {/* Latest Articles */}
