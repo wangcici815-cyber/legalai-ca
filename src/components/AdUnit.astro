@@ -31,7 +31,7 @@ const sizeClasses: Record<string, string> = {
 
 <!-- AdSense container — empty placeholder, no content weight -->
 <div
-  class="ad-unit w-full my-6 flex justify-center {sizeClasses[format]} {className}"
+  class={`ad-unit w-full my-6 flex justify-center ${sizeClasses[format]} ${className}`}
   data-ad-format={format}
   data-ad-slot={slot}
   data-full-width-responsive="true"
