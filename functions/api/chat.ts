@@ -30,9 +30,7 @@ const SYSTEM_PROMPT = `You are a California legal information assistant. Your pu
 9. Keep responses to 2-4 paragraphs unless more detail is specifically requested.
 10. When applicable, suggest using the website's calculators (child support, alimony) or relevant guides.`;
 
-async function callDeepSeek(messages: ChatMessage[]): Promise<string> {
-  const apiKey = (globalThis as any).DEEPSEEKKEY || process?.env?.DEEPSEEKKEY;
-
+async function callDeepSeek(messages: ChatMessage[], apiKey: string): Promise<string> {
   if (!apiKey) {
     throw new Error('DEEPSEEKKEY is not configured');
   }
@@ -133,7 +131,9 @@ export async function onRequest(context: { request: Request; env: Record<string,
       { role: 'user', content: body.message },
     ];
 
-    const reply = await callDeepSeek(messages);
+    // Read API key from Cloudflare env (context.env)
+    const apiKey = context.env.DEEPSEEKKEY;
+    const reply = await callDeepSeek(messages, apiKey);
 
     const response: ChatResponse = { reply };
     return new Response(JSON.stringify(response), { status: 200, headers });
