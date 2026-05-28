@@ -4,20 +4,9 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-const isBuild = process.argv.includes('build');
-const isCfDeploy = !!(process.env.CF_PAGES || process.env.CLOUDFLARE_BUILD);
-
-// Only use Cloudflare adapter during build (not dev, miniflare crashes on Windows)
-let adapter;
-if (isBuild || isCfDeploy) {
-  const cloudflare = (await import('@astrojs/cloudflare')).default;
-  adapter = cloudflare({ mode: 'directory' });
-}
-
 export default defineConfig({
   site: 'https://legalai-ca.top',
   output: 'static',
-  adapter,
   integrations: [
     react(),
     mdx(),
