@@ -53,7 +53,11 @@ export default function AIChat() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Scroll messages container only (not the whole page)
+    const container = messagesEndRef.current?.parentElement;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages]);
 
   function fillExample(question: string) {
