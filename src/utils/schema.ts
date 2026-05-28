@@ -87,7 +87,7 @@ export function organizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'LegalAI CA',
-    url: 'https://legalai-ca.pages.dev',
+    url: 'https://legalai-ca.top',
     description: 'Free California legal information, tools, and AI assistant.',
   };
 }

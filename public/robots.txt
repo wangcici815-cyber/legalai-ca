@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://legalai-ca.pages.dev/sitemap-index.xml
+Sitemap: https://legalai-ca.top/sitemap-index.xml

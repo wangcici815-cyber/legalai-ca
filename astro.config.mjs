@@ -15,7 +15,7 @@ if (isBuild || isCfDeploy) {
 }
 
 export default defineConfig({
-  site: 'https://legalai-ca.pages.dev',
+  site: 'https://legalai-ca.top',
   output: 'static',
   adapter,
   integrations: [
