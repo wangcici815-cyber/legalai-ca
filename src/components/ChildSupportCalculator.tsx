@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { calculateChildSupport, type ChildSupportInput, type ChildSupportResult } from '../tools/child-support';
+import CalculatorAIPrompt from './CalculatorAIPrompt';
 
 const defaultInput: ChildSupportInput = {
   parent1MonthlyGross: 8000,
@@ -223,6 +224,9 @@ export default function ChildSupportCalculator() {
               </tbody>
             </table>
           </div>
+
+          {/* AI Prompt */}
+          <CalculatorAIPrompt calculatorType="child-support" inputValues={{}} />
 
           <p className="text-xs text-gray-500 italic">
             This is an estimate based on the California Guideline formula (Family Code §4055).

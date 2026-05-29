@@ -19,6 +19,15 @@ const { Content } = await article.render();
 const siteUrl = 'https://legalai-ca.top';
 const pageUrl = `${siteUrl}/guides/${article.slug}`;
 
+// Map article slug to AI topic for article-end prompts
+const slugTopicMap: Record<string, string> = {
+  'how-to-file-divorce-california': 'divorce',
+  'california-divorce-requirements': 'divorce',
+  'california-child-support-guide': 'child support',
+  'california-spousal-support-guide': 'spousal support',
+};
+const aiTopic = slugTopicMap[article.slug] || '';
+
 // FAQ data for JSON-LD
 const faqData = getFaqs(article.slug);
 
@@ -61,6 +70,7 @@ function getFaqs(slug: string): { question: string; answer: string }[] {
   canonical={`/guides/${article.slug}`}
   datePublished={article.data.datePublished}
   dateModified={article.data.dateModified || article.data.datePublished}
+  aiTopic={aiTopic}
   breadcrumbs={[
     { name: 'Home', url: siteUrl },
     { name: 'Guides', url: `${siteUrl}/guides` },

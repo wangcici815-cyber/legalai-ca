@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { calculateAlimony, type AlimonyInput, type AlimonyResult } from '../tools/alimony';
+import CalculatorAIPrompt from './CalculatorAIPrompt';
 
 const defaultInput: AlimonyInput = {
   marriageDurationYears: 10,
@@ -202,6 +203,9 @@ export default function AlimonyEstimator() {
               </p>
             </div>
           )}
+
+          {/* AI Prompt */}
+          <CalculatorAIPrompt calculatorType="alimony" inputValues={{}} />
 
           <p className="text-xs text-gray-500 italic">
             This is an estimate based on common California county guidelines.

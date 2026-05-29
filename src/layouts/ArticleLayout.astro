@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import AdUnit from '../components/AdUnit.astro';
+import ArticleAIPrompt from '../components/ArticleAIPrompt.astro';
 import Disclaimer from '../components/Disclaimer.astro';
 
 export interface Props {
@@ -11,6 +12,10 @@ export interface Props {
   datePublished?: string;
   dateModified?: string;
   noIndex?: boolean;
+  /** AI prompt topic (e.g. 'divorce', 'child support') — shows related questions */
+  aiTopic?: string;
+  /** Custom questions for the AI prompt (overrides auto-generated) */
+  aiQuestions?: string[];
 }
 
 const {
@@ -21,6 +26,8 @@ const {
   datePublished,
   dateModified,
   noIndex,
+  aiTopic,
+  aiQuestions,
 } = Astro.props;
 ---
 
@@ -71,6 +78,9 @@ const {
         <div class="prose max-w-none">
           <slot />
         </div>
+
+        <!-- AI Assistant Prompt -->
+        <ArticleAIPrompt topic={aiTopic} questions={aiQuestions} />
 
         <!-- Ad: After Article Content -->
         <AdUnit format="in-article" class="my-8" />

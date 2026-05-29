@@ -51,6 +51,20 @@ export default function AIChat() {
   const [dailyCount, setDailyCountState] = useState(getDailyCount);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const initialQuestionSet = useRef(false);
+
+  useEffect(() => {
+    // Auto-fill question from URL ?q= parameter (once on mount)
+    if (!initialQuestionSet.current) {
+      initialQuestionSet.current = true;
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q');
+      if (q) {
+        setInput(q);
+        inputRef.current?.focus();
+      }
+    }
+  }, []);
 
   useEffect(() => {
     // Scroll messages container only (not the whole page)
