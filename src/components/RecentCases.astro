@@ -1,0 +1,145 @@
+---
+// RecentCases — displays recent California legal cases with AI assistant commentary
+// Each case: name + court + summary + commentary linking to AI assistant
+
+export interface CaseItem {
+  name: string;
+  court: string;
+  date: string;
+  topic: string;
+  summary: string;
+  takeaway: string;
+  question: string;   // sample question user could ask AI
+}
+
+const cases: CaseItem[] = [
+  {
+    name: "Reasin v. Reasin (In re Susan D.)",
+    court: "California Court of Appeal, 4th District",
+    date: "January 16, 2026",
+    topic: "Child Support",
+    summary: `A divorce judgment ordered $1,750/month in child support for three children with no allocation between them. When each child reached adulthood, the father unilaterally reduced payments. The Court of Appeal ruled that retroactively allocating the lump sum among children after one ages out is not a prohibited retroactive modification — it is simply calculating arrears after a support obligation has legally terminated.`,
+    takeaway: `California courts can allocate a lump-sum child support order among multiple children retroactively when one child emancipates, without running afoul of the ban on retroactive modifications.`,
+    question: `Under Reasin v. Reasin, can a court allocate child support arrears among children after one turns 18?`,
+  },
+  {
+    name: "Eshagian v. Cepeda",
+    court: "California Court of Appeal, 2nd District",
+    date: "June 26, 2025",
+    topic: "Landlord-Tenant",
+    summary: `A landlord served a 3-day notice to pay rent or quit that had three defects: it didn't clearly state the tenant would lose possession if rent wasn't paid, it didn't specify when the notice period began or ended, and it listed the tenant's own residence as the payment address. The Court of Appeal held the notice was invalid under CCP § 1161(2), and the default judgment for eviction could not stand.`,
+    takeaway: `Eviction notices in California must strictly comply with all technical requirements — even a small error can invalidate the entire eviction.`,
+    question: `What are the requirements for a valid 3-day notice to pay rent or quit in California?`,
+  },
+  {
+    name: "In re Marriage of Carter",
+    court: "California Court of Appeal, 4th District",
+    date: "September 16, 2025",
+    topic: "Divorce & Spousal Support",
+    summary: `In this long-running divorce case (the fourth appeal), the court addressed how to calculate additional child support based on stock option income from a corporate merger. The trial court chose one accounting method for past arrears and another going forward to avoid a windfall. The Court of Appeal also denied modification of spousal support, reinforcing the limits on modifying support after judgment.`,
+    takeaway: `Stock options and other complex assets require careful accounting in California support calculations — the method used can significantly change the support amount.`,
+    question: `How are stock options treated for child and spousal support in California?`,
+  },
+  {
+    name: "Western Manufactured Housing Communities Ass'n v. City of Santa Rosa",
+    court: "California Court of Appeal",
+    date: "April 17, 2026",
+    topic: "Tenant Rights / Rent Control",
+    summary: `During a state of emergency, Penal Code § 396 caps rent increases at 10%. This case confirmed that the cap applies to rent-controlled spaces and refers to the amount authorized under local rent control at the time the emergency was declared. Importantly, landlords cannot "recoup" suppressed rent increases after the emergency ends.`,
+    takeaway: `Rent increase caps during emergencies are permanent limits — landlords cannot later make up for increases they couldn't impose during the emergency period.`,
+    question: `Can a California landlord recoup rent increases that were capped during a state of emergency?`,
+  },
+];
+---
+
+<section class="bg-gray-50 py-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-2 text-center">
+      Recent California Cases
+    </h2>
+    <p class="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+      Real cases from California courts — see how the law applies in practice and
+      what these rulings mean for you.
+    </p>
+
+    <div class="space-y-8">
+      {
+        cases.map((c) => (
+          <article class="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+            {/* Header */}
+            <div class="border-b border-border bg-gray-50/50 px-6 py-4">
+              <div class="flex flex-wrap items-start gap-3">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent/10 text-accent">
+                  {c.topic}
+                </span>
+                <span class="text-xs text-gray-500 mt-0.5">{c.court} &middot; {c.date}</span>
+              </div>
+              <h3 class="text-lg font-semibold text-primary mt-2">{c.name}</h3>
+            </div>
+
+            {/* Body */}
+            <div class="px-6 py-5 space-y-4">
+              <div>
+                <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">Case Summary</h4>
+                <p class="text-sm text-gray-700 leading-relaxed">{c.summary}</p>
+              </div>
+
+              <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <h4 class="text-xs font-semibold uppercase tracking-wider text-yellow-700 mb-1">Key Takeaway</h4>
+                <p class="text-sm text-yellow-800">{c.takeaway}</p>
+              </div>
+
+              {/* AI Assistant CTA */}
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                  <span class="text-xl flex-shrink-0 mt-0.5">🤖</span>
+                  <div>
+                    <h4 class="text-xs font-semibold uppercase tracking-wider text-blue-700 mb-1">
+                      Ask AI Assistant
+                    </h4>
+                    <p class="text-sm text-blue-800 mb-2">
+                      This case raises complex legal questions. Instead of spending hours
+                      reading legal documents, ask our AI assistant to explain how this
+                      ruling might apply to your situation:
+                    </p>
+                    <div class="bg-white border border-blue-200 rounded-lg p-3 mb-3">
+                      <p class="text-sm text-gray-600 italic">
+                        "{c.question}"
+                      </p>
+                    </div>
+                    <a
+                      href={`/ai-assistant`}
+                      class="inline-flex items-center gap-1.5 text-sm font-medium text-blue-700 hover:text-blue-800 transition-colors"
+                    >
+                      Ask this question now
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center mt-10">
+      <p class="text-gray-600 mb-4">
+        California law changes constantly through new court rulings.
+        Stay informed and get personalized answers.
+      </p>
+      <a
+        href="/ai-assistant"
+        class="inline-flex items-center px-6 py-3 bg-accent text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+      >
+        Ask the AI Legal Assistant
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
