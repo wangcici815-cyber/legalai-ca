@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecentCases from '../components/RecentCases.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+---
+
+<BaseLayout
+  title="Recent California Cases — LegalAI CA"
+  description="Stay updated on recent California court rulings in family law, landlord-tenant, divorce, child support, and more. Real cases with plain-English summaries."
+  canonical="/recent-cases"
+  breadcrumbs={[
+    { name: 'Home', url: 'https://legalai-ca.top/' },
+    { name: 'Recent Cases', url: 'https://legalai-ca.top/recent-cases' },
+  ]}
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-4">
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-2">Recent California Cases</h1>
+    <p class="text-gray-600">
+      Real rulings from California appellate courts, summarized in plain English
+      with key takeaways. Updated regularly as new decisions are published.
+    </p>
+  </div>
+
+  <RecentCases />
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Disclaimer />
+  </section>
+</BaseLayout>

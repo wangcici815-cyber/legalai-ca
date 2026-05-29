@@ -1,85 +1,51 @@
 ---
-// RecentCases — displays recent California legal cases with AI assistant commentary
-// Each case: name + court + summary + commentary linking to AI assistant
+// RecentCases — displays California legal cases with AI assistant commentary
+// Props:
+//   limit - if set, only shows the latest N cases (for homepage)
+//   showViewAll - if true, shows a "View All" link when limited (for homepage)
 
-export interface CaseItem {
-  name: string;
-  court: string;
-  date: string;
-  topic: string;
-  summary: string;
-  takeaway: string;
-  question: string;   // sample question user could ask AI
-  links: { label: string; url: string }[];
+import { cases, type CaseItem } from '../data/cases';
+
+export interface Props {
+  limit?: number;
+  showViewAll?: boolean;
 }
 
-const cases: CaseItem[] = [
-  {
-    name: "Reasin v. Reasin (In re Susan D.)",
-    court: "California Court of Appeal, 4th District",
-    date: "January 16, 2026",
-    topic: "Child Support",
-    summary: `A divorce judgment ordered $1,750/month in child support for three children with no allocation between them. When each child reached adulthood, the father unilaterally reduced payments. The Court of Appeal ruled that retroactively allocating the lump sum among children after one ages out is not a prohibited retroactive modification — it is simply calculating arrears after a support obligation has legally terminated.`,
-    takeaway: `California courts can allocate a lump-sum child support order among multiple children retroactively when one child emancipates, without running afoul of the ban on retroactive modifications.`,
-    question: `Under Reasin v. Reasin, can a court allocate child support arrears among children after one turns 18?`,
-    links: [
-      { label: "Full opinion on VLEX", url: "https://case-law.vlex.com/vid/reasin-v-reasin-in-1102847958" },
-    ],
-  },
-  {
-    name: "Eshagian v. Cepeda",
-    court: "California Court of Appeal, 2nd District",
-    date: "June 26, 2025",
-    topic: "Landlord-Tenant",
-    summary: `A landlord served a 3-day notice to pay rent or quit that had three defects: it didn't clearly state the tenant would lose possession if rent wasn't paid, it didn't specify when the notice period began or ended, and it listed the tenant's own residence as the payment address. The Court of Appeal held the notice was invalid under CCP § 1161(2), and the default judgment for eviction could not stand.`,
-    takeaway: `Eviction notices in California must strictly comply with all technical requirements — even a small error can invalidate the entire eviction.`,
-    question: `What are the requirements for a valid 3-day notice to pay rent or quit in California?`,
-    links: [
-      { label: "Weintraub Tobin — Law firm analysis", url: "https://www.weintraub.com/2025/07/cre-alert-california-case-law-changes-requirements-for-three-day-notices/" },
-      { label: "NAA — Landlord practice alert", url: "https://naahq.org/news/invalid-3-day-notice-vacates-possession-only-judgment-california" },
-      { label: "Tenant-side analysis", url: "https://jacobfights.com/what-does-the-eshagian-v-cepeda-ruling-mean-for-three-day-notices/" },
-    ],
-  },
-  {
-    name: "In re Marriage of Carter",
-    court: "California Court of Appeal, 4th District",
-    date: "September 16, 2025",
-    topic: "Divorce & Spousal Support",
-    summary: `In this long-running divorce case (the fourth appeal), the court addressed how to calculate additional child support based on stock option income from a corporate merger. The trial court chose one accounting method for past arrears and another going forward to avoid a windfall. The Court of Appeal also denied modification of spousal support, reinforcing the limits on modifying support after judgment.`,
-    takeaway: `Stock options and other complex assets require careful accounting in California support calculations — the method used can significantly change the support amount.`,
-    question: `How are stock options treated for child and spousal support in California?`,
-    links: [
-      { label: "Full opinion on CourtListener", url: "https://www.courtlistener.com/opinion/10382019/marriage-of-carter-ca41/" },
-    ],
-  },
-  {
-    name: "Western Manufactured Housing Communities Ass'n v. City of Santa Rosa",
-    court: "California Court of Appeal",
-    date: "April 17, 2026",
-    topic: "Tenant Rights / Rent Control",
-    summary: `During a state of emergency, Penal Code § 396 caps rent increases at 10%. This case confirmed that the cap applies to rent-controlled spaces and refers to the amount authorized under local rent control at the time the emergency was declared. Importantly, landlords cannot "recoup" suppressed rent increases after the emergency ends.`,
-    takeaway: `Rent increase caps during emergencies are permanent limits — landlords cannot later make up for increases they couldn't impose during the emergency period.`,
-    question: `Can a California landlord recoup rent increases that were capped during a state of emergency?`,
-    links: [
-      { label: "California Lawyers Association — Case summary", url: "https://calawyers.org/real-property-law/california-case-summary-update-may-2026-real-property-case-summaries/" },
-    ],
-  },
-];
+const { limit, showViewAll = false } = Astro.props;
+const displayCases = limit ? cases.slice(0, limit) : cases;
+const isLimited = limit !== undefined && cases.length > limit;
 ---
 
 <section class="bg-gray-50 py-16">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-2 text-center">
-      Recent California Cases
-    </h2>
-    <p class="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
-      Real cases from California courts — see how the law applies in practice and
-      what these rulings mean for you.
-    </p>
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-2">
+          Recent California Cases
+        </h2>
+        <p class="text-gray-600 max-w-2xl">
+          Real cases from California courts — see how the law applies in practice and
+          what these rulings mean for you.
+        </p>
+      </div>
+      {
+        showViewAll && (
+          <a
+            href="/recent-cases"
+            class="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-blue-700 transition-colors no-underline flex-shrink-0"
+          >
+            View All Cases
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        )
+      }
+    </div>
 
     <div class="space-y-8">
       {
-        cases.map((c) => (
+        displayCases.map((c: CaseItem) => (
           <article class="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
             {/* Header */}
             <div class="border-b border-border bg-gray-50/50 px-6 py-4">
@@ -142,7 +108,7 @@ const cases: CaseItem[] = [
                       </p>
                     </div>
                     <a
-                      href={`/ai-assistant`}
+                      href="/ai-assistant"
                       class="inline-flex items-center gap-1.5 text-sm font-medium text-blue-700 hover:text-blue-800 transition-colors"
                     >
                       Ask this question now
@@ -158,6 +124,22 @@ const cases: CaseItem[] = [
         ))
       }
     </div>
+
+    {
+      isLimited && (
+        <div class="text-center mt-8 sm:hidden">
+          <a
+            href="/recent-cases"
+            class="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-blue-700 transition-colors"
+          >
+            View All Cases ({cases.length} total)
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      )
+    }
 
     <!-- Bottom CTA -->
     <div class="text-center mt-10">
