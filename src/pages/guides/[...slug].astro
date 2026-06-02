@@ -23,8 +23,10 @@ const pageUrl = `${siteUrl}/guides/${article.slug}`;
 const slugTopicMap: Record<string, string> = {
   'how-to-file-divorce-california': 'divorce',
   'california-divorce-requirements': 'divorce',
+  'california-divorce-house-community-property': 'divorce',
   'california-child-support-guide': 'child support',
   'california-spousal-support-guide': 'spousal support',
+  'california-tenant-eviction-rights': 'landlord',
 };
 const aiTopic = slugTopicMap[article.slug] || '';
 
@@ -58,6 +60,20 @@ function getFaqs(slug: string): { question: string; answer: string }[] {
       { question: 'Can I file for divorce in California if I just moved here?', answer: 'No. You must have lived in California for at least 6 months before filing. If you just moved, you\'ll need to wait until you meet the residency requirement.' },
       { question: 'Does legal separation have the same residency requirements?', answer: 'Generally, yes. The same residency requirements apply to legal separation as to divorce.' },
       { question: 'Can I file for divorce in any California county?', answer: 'No. You must file in a county where you or your spouse meet the 3-month county residency requirement.' },
+    ];
+  }
+  if (slug === 'california-divorce-house-community-property') {
+    return [
+      { question: 'Do we have to sell the house in a California divorce?', answer: 'No. You have several options: one spouse can buy out the other, you can sell and split the proceeds, defer the sale (common when kids are involved), or in rare cases continue co-owning. The court does not force a sale unless no workable alternative exists.' },
+      { question: 'What happens if I owned the house before marriage?', answer: 'The house is generally your separate property. However, if marital funds were used for mortgage payments or improvements, your spouse may have gained a partial interest through the Moore/Marsden formula.' },
+      { question: 'Can I sell the house during divorce proceedings?', answer: 'Not without your spouse\'s written consent or a court order. Automatic Temporary Restraining Orders (ATROs) kick in when divorce papers are filed, preventing either spouse from selling or transferring property.' },
+    ];
+  }
+  if (slug === 'california-tenant-eviction-rights') {
+    return [
+      { question: 'How long does an eviction take in California?', answer: 'A straightforward eviction typically takes 30 to 60 days from filing to sheriff enforcement. If the tenant fights back, it can stretch to 3 to 6 months. Landlords must follow a strict legal process — they cannot simply change the locks or shut off utilities.' },
+      { question: 'Can my landlord evict me without a court order?', answer: 'No. Self-help evictions — changing locks, removing belongings, shutting off utilities — are illegal in California. Only a sheriff can physically remove you after a court judgment.' },
+      { question: 'What makes a 3-day notice invalid?', answer: 'The notice must clearly state you will lose possession if rent isn\'t paid, specify exact dates (including that weekends and holidays are excluded), and provide a proper address where payment can be made. Recent court cases have thrown out evictions for missing any of these details.' },
     ];
   }
   return [];
